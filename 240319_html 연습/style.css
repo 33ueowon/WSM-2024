@@ -1,3 +1,47 @@
 h1{
     color: #333333;
 }
+li{
+    background-color: rgb(232, 197, 171);
+}
+ul > li {                   /*ul 바로 아래 자식 li에 적용*/
+    background-color: rgb(156, 194, 181);
+}
+ul > ul >li {               /* ul 안에 ul안에 li 색상이 바뀜.(구체적이기에 ~ 순서를 바꿔도 색상이 안바뀜)*/
+    background-color: rgb(212, 189, 153);
+}
+
+.korea{
+    color: rgb(94, 94, 163);
+}
+.japan{
+    color: rgb(171, 85, 85);
+}
+.incheon {                  /*순서를 바꿔도 색상 바뀜 X*/
+    color: rgb(26, 26, 139);
+}
+#leader{
+    color: rgb(29, 121, 128);
+}
+li:first-child{     /*첫째인데 li인 아이*/
+    font-weight: bold;
+}
+li:last-child{      /*막내인데 li인 아이*/
+    font-style: italic;
+    color: rgb(68, 103, 85);
+}
+li:nth-child(3){
+    color: rgb(188, 95, 141);
+}
+li:nth-child(2n){       /*2n짝수번째*/
+    background-color: rgb(149, 167, 214);
+}
+h1,h3{                  /*h1과 h3에 모두 적용*/
+    /* background-color: rgb(144, 183, 185); */
+}
+h1 + h2 {              /* h1과 h2 자매여야함. h1 바로 아랫자매 h2에 적용  */
+    background-color: rgb(239, 236, 193);
+}
+h1 ~ h3{            /*h1과 h3 자매여야함. h1 아랫자매 모든 h3에 적용*/
+    background-color: rgb(196, 221, 158);
+}
