@@ -53,7 +53,9 @@ nav.container{
 nav a {
     color: #fff;
 }
-
+.nav-logo{
+    margin-top: 5px;
+}
 .nav-list{
     display: flex;
     align-items: center;
