@@ -38,10 +38,9 @@ body>header{
     top: 0;
     right: 0;
     left: 0;
-ㄴㄴㄴ
 }
 nav.container{
-    background-color: var( --primary-color);ㅂㅈ효ㅕㅂㅈㅎ됴ㅕㅎㅈ뵤뎧ㅂ져ㅛㄷㅎㅈ볃ㅎㄴ
+    background-color: var( --primary-color);
     height: var(--nav-height);
     display: flex;  /* 기본값 : 가로로 배치 */
     justify-content: space-between; /* 메인축(가로)으로 양쪽 정렬 */
