@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>부모자식선택자</title>
+    <style>
+        .a > .b {
+            border: 1px rgb(136, 186, 130) solid;
+        }
+        .a > .c {
+            margin-top: 10px;
+        }
+        .a .c {
+            border: 1px rgb(90, 54, 54) solids;
+            margin-left: 30px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="a">조부모
+        <div class="b">부모
+            <div class="c">자식
+            </div>
+        </div>
+    </div>
+</body>
+</html>
