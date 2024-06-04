@@ -48,8 +48,8 @@
     text-align: center;
 }
 
-/* table */
-@media screen and (max-width:600px){
+/* tablet */
+@media screen and (max-width:976px){
     #School-food{
         margin-top: calc(var(--nav-height) + 30px); /* 날짜 확인 */
     }
