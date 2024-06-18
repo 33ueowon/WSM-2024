@@ -69,7 +69,7 @@ nav a {
 @media screen and (max-width: 600px) {  /* 600px 이하 일 때 스타일 */
     nav.container {
         padding: 0 20px;    /* 왼/오른 여백을 줄이자 */
-        z-index: var(--z-index);
+        /* z-index: var(--z-index); */
     }
 
     .nav-list{
@@ -80,6 +80,7 @@ nav a {
         right: 0; 
         left: 0;
         z-index: -1;    /* nav 뒤에 숨기자 */
+        backdrop-filter: blur(4px); /* 배경 흐리게 */
     }
 
     .nav-item{
@@ -93,6 +94,8 @@ nav a {
     }
     .nav-toggle{
         display: block; /* 햄버거 메뉴 보여라 */
+        cursor: pointer;
+        margin-top: 8px;
     }
 
     .show-menu{
