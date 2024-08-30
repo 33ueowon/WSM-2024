@@ -1,10 +1,73 @@
 .container{
-    width: 600px;
-    height: 800px;
+    width: 800px;
+    height: 400px;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20% 20%;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr;
+   
+    
 }
 .item{
+    border: 1px solid black;
     display: grid;
-    border: solid pink;
+    place-items: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.item:nth-child(1){
+    background-color: pink;
+}
+.week_name{
+    background-color: pink;
+    color: white;
+}
+/* .item:nth-child(6n+1){
+    color: palevioletred;
+} */
+.two{
+    grid-row-start: 4;
+    grid-row-end: 6;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+.wsm{
+    grid-row-start: 7;
+    grid-row-end: span 2;
+    grid-column-start: 3;
+
+}
+.java{
+    grid-row-start: 3;
+    grid-row-end: 5;
+    grid-column-start: 4;
+}
+.wsm1{
+    grid-area: 4 / 6 / span 2 / 7;
+    /* grid-row-start: 4;
+    grid-row-end: 6;
+    grid-column-start: 6; */
+}
+.ca{
+    grid-area: 7 / 4 / span 2 /5;
+    /* grid-row-start: 7;
+    grid-row-end: 9;
+    grid-column-start: 4; */
+}
+.python{
+    grid-area: 6 / 5 /span 2/6;
+    /* grid-row-start: 6;
+    grid-row-end: 8;
+    grid-column-start: 5; */
+}
+.coding{
+    grid-area: 4 / 5 / 6 / 6;
+    /* grid-row-start: 4;
+    grid-row-end: 6;
+    grid-column-start: 5; */
+}
+.choice{
+    grid-area: 6 / 6 / span 2 / 7;
+}
+.class{
+    color: hotpink;
 }
