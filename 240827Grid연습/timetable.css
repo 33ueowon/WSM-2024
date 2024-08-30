@@ -1,0 +1,10 @@
+.container{
+    width: 600px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20% 20%;
+}
+.item{
+    display: grid;
+    border: solid pink;
+}
