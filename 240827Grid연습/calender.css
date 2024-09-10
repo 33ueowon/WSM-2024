@@ -36,8 +36,17 @@
     border-bottom: 1.4px solid #555;
     font-weight: bold;
 }
-.other-date{
-    color: #ddd;
+.item:nth-child(7n+1){
+    color: coral;
+}
+.item:nth-child(7n+7){
+    color: dodgerblue;
+}
+
+
+.other-month{
+    color: #ddd !important;
 
 }
+
 
