@@ -68,10 +68,10 @@ const setCalendar = (date) => {
     //이전 달 뒷 날짜 구하자
     //?~ 이전 달 마지막 날짜 ?: 이전달 마지막 날짜 - 이번 달 첫 날의 요일 0~이번 달 1일의 요일 -1까지 이전 달 마지막 날짜 - 이번 달 1일의 요일 + 1(시작날짜)부터 +1해서 쓰자 : 
     for (let date = (prevMonthLastDate.getDate()-firstDay + 1); date <= prevMonthLastDate.getDate(); date++) {
-        let currentMonthDateDiv = document.createElement("div");    //<div></div>
-        currentMonthDateDiv.className = "item other-month"; //<div class= "item"></div>
-        currentMonthDateDiv.textContent = date; ////<div class= "item">1</div>
-        calendarContainerDiv.appendChild(currentMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
+        let prevMonthLastDateDiv = document.createElement("div");    //<div></div>
+        prevMonthLastDateDiv.className = "item other-month"; //<div class= "item"></div>
+        prevMonthLastDateDiv.textContent = date; ////<div class= "item">1</div>
+        calendarContainerDiv.appendChild(prevMonthLastDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
     }
 
 
@@ -94,10 +94,10 @@ const setCalendar = (date) => {
     //다음 달 앞 날짜 구하자
     // 1~? ?: 6-이번 달 마지막 날의 요일
     for (let date = 1; date <= (6 -  lastDay); date++) {
-        let currentMonthDateDiv = document.createElement("div");    //<div></div>
-        currentMonthDateDiv.className = "item other-month"; //<div class= "item"></div>
-        currentMonthDateDiv.textContent = date; ////<div class= "item">1</div>
-        calendarContainerDiv.appendChild(currentMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
+        let nextMonthDateDiv = document.createElement("div");    //<div></div>
+        nextMonthDateDiv.className = "item other-month"; //<div class= "item"></div>
+        nextMonthDateDiv.textContent = date; ////<div class= "item">1</div>
+        calendarContainerDiv.appendChild(nextMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
     }
     //1~30(이번 달 날짜들)
     // 1~5(다음달 날짜들 마지막 날짜가 제일 중요)
