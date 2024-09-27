@@ -4,6 +4,7 @@ const calendarContainerDiv = document.querySelector("#calendar-container");
 //현재 날짜 구하자
 let currentDate = new Date();
 
+// 제목 세팅
 const setCalendarHeader = (date) => {
     //연도 구하자
     const year = date.getFullYear();
@@ -11,8 +12,9 @@ const setCalendarHeader = (date) => {
     const month = date.getMonth()  ;  //0: 1월
     
     titleString = `${year}년  ${month + 1}월`;
+    //html 요소 가져옴
     const calendarHeaderH1 = document.querySelector("#calendar-header h1");
-    calendarHeaderH1.innerHTML = titleString;
+    calendarHeaderH1.innerHTML = titleString;   //innerHTML 쓰는 걸 추천 text로 쓰면 내가 쓴 코드 다 보이는 거
 }
 
 const changeMonth = (delta) => {
@@ -22,18 +24,20 @@ const changeMonth = (delta) => {
 }
 //이전 달 버튼 이벤트 처리하자
 const prevMonthButton = document.getElementById("prev-month"); 
-prevMonthButton.addEventListener("click", () => changeMonth(-1));  //ㅅㅣ험  //.addEventListner("click", console.log('이전 달')) 하면 안돼. console.log()함수 실행한 결과를 클릭했을 때 실행하는 거야. 즉 아무 일도 안함.
+prevMonthButton.addEventListener("click", () => changeMonth(-1));  //ㅅㅣ험 이전 달 -1  //.addEventListner("click", console.log('이전 달')) 하면 안돼. console.log()함수 실행한 결과를 클릭했을 때 실행하는 거야. 즉 아무 일도 안함.
 // console.log('이전 달');
 
 //다음 달 버튼 이벤트 처리하자ss
-const nextMonthButton = document.querySelector('#next-month');  //시험
+const nextMonthButton = document.querySelector('#next-month');  
 // const nextMonthButton = document.getElementById("next-month");
-nextMonthButton.onclick = () =>  changeMonth(1);
+nextMonthButton.onclick = () =>  changeMonth(1);    //시험 다음 달 +1
 // console.log('다음 달');
-//일 구하자
+//달력 표시하자 (요일, 날짜)
 const setCalendar = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
+
+    const prevMonthLastDate = new Date(year,month,0)
     
     //첫날의 요일 구하자 : 이전 달 뒷 날짜 쓰기 위하여
     const firstDay = new Date(year,month,1).getDay();   //0 : 일, 6 : 토
@@ -62,7 +66,14 @@ const setCalendar = (date) => {
     calendarContainerDiv.innerHTML = weekNameString;
 
     //이전 달 뒷 날짜 구하자
-    //0~이번 달 1일의 요일 -1까지 이전 달 마지막 날짜 - 이번 달 1일의 요일 + 1(시작날짜)부터 +1해서 쓰자 : 
+    //?~ 이전 달 마지막 날짜 ?: 이전달 마지막 날짜 - 이번 달 첫 날의 요일 0~이번 달 1일의 요일 -1까지 이전 달 마지막 날짜 - 이번 달 1일의 요일 + 1(시작날짜)부터 +1해서 쓰자 : 
+    for (let date = (prevMonthLastDate.getDate()-firstDay + 1); date <= prevMonthLastDate.getDate(); date++) {
+        let currentMonthDateDiv = document.createElement("div");    //<div></div>
+        currentMonthDateDiv.className = "item other-month"; //<div class= "item"></div>
+        currentMonthDateDiv.textContent = date; ////<div class= "item">1</div>
+        calendarContainerDiv.appendChild(currentMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
+    }
+
 
     //이번 달 날짜들 쓰자( 1~30 : 1~last Date.getDate())
 
@@ -81,8 +92,13 @@ const setCalendar = (date) => {
     }
 
     //다음 달 앞 날짜 구하자
-    // 이번 달 마지막 날의 요일 +1~6까지 부터 차례대로 날짜 쓰자
-    
+    // 1~? ?: 6-이번 달 마지막 날의 요일
+    for (let date = 1; date <= (6 -  lastDay); date++) {
+        let currentMonthDateDiv = document.createElement("div");    //<div></div>
+        currentMonthDateDiv.className = "item other-month"; //<div class= "item"></div>
+        currentMonthDateDiv.textContent = date; ////<div class= "item">1</div>
+        calendarContainerDiv.appendChild(currentMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
+    }
     //1~30(이번 달 날짜들)
     // 1~5(다음달 날짜들 마지막 날짜가 제일 중요)
 }
