@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&display=swap');
+
+/* css Variables */
+:root {
+    /* color */
+    /* HSL를 쓰는 것을 선호하자: 같은 색상과 채도를 유지하고 일관되지만 변화를 살짝 줄 수 있음 */
+    --primary-color: hsl(160, 100%, 25%); /* 색상, 채도, 밝기 */
+    --secondary-color: hsl(339, 77%, 59%);
+    --third-color: hsl(160, 100%, 35%);
+    --body-color: #fff;
+
+    /* font */
+    --body-font: 'Cute Font', sans-serif;
+    --h1-font-size: 2rem; /* 크롬 > 설정 > 글자 크기: 중간일 때, 대문자 M의 너비인 16px을 기준으로 함 = 1 rem */
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.8rem;
+    --smaller-font-size: 0.6rem;
+
+    /* z-index */   
+    --z-index: 100;
+
+    /* nav */
+    --nav-height: 44px;
+
+}
+
+/* nav */
+body {
+    font-family: var(--body-font);
+    background-color: var(--body-color);
+}
+body>header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+}
+.nav.container {
+    background-color: var(--primary-color);
+    height: var(--nav-height);
+    display: flex;                  /* 기본값: 가로로 배치 */
+    justify-content: space-between; /* 메인축(가로)으로 양쪽정렬 */
+    align-items: center;            /* 교차축(세로)으로 가운데 정렬*/
+    padding: 0 40px;                /* 왼/오른만 양쪽 여백 */
+    color: #fff;
+    font-size: var(--h2-font-size); /* 웹폰트 아이코, 글자 크게 */
+}
+nav a {
+    color: #fff;
+}
+.nav-logo {
+    margin-top: 5px;
+}
+.nav-list {
+    display: flex;
+    align-items: center;
+    column-gap: 40px;       /* 열 사이의 간격 */
+    transition: 0.4s ease-in-out;
+}
+.nav-toggle {
+    display: none;  /* 사라져 */ 
+    margin-top: 5px;
+}
+
+/* mobile */
+@media screen and (max-width: 600px) {   /* 600px 이하 일 때 스타일 */
+    nav.container {
+        padding: 0 20px; /* 왼/오른 여백 조금 줄이자 */
+    }
+
+    .nav-list {
+        flex-direction: column; /* 세로로 배치 */
+        background-color: hsla(200, 100%, 25%, 0.6);
+        position: absolute;
+        top: calc(var(--nav-height) - 140px); /* 실제 위치는 44px - 140px(nav-list 높이). !주의 연산자 양 옆 띄어쓰기 꼭 해야 함 */
+        right: 0;
+        left: 0;
+        z-index: -1;    /* nav 뒤에 숨기자 */
+        backdrop-filter: blur(4px); /* 배경 흐리게 */
+    }
+
+    .nav-item {
+        padding: 0.5rem;    /* 메뉴 아이템 세로 간격 벌리자 */
+        border-bottom: 1px solid white;
+        width: 100%;            /* 가로 너비 100% */
+        text-align: center;     /* 글자 가운데 */
+    }
+    .nav-link {
+        display: block;     /* 링크의 너비: 콘텐츠 -> 100%로 늘리자 */
+    }
+
+    .nav-toggle {
+        display: block;     /* 햄버거 메뉴 보여라 */
+        cursor: pointer;    /* 마우스 포인터 손으로 바꾸자 */
+        margin-top: 6px;
+    }
+
+    /* 새로 만듦 */
+    .show-menu {
+        top: var(--nav-height);     /* nav-list 아래로 내리자 */
+    }
+}

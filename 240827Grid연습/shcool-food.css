@@ -5,7 +5,7 @@
     margin-top: calc(var(--nav-height) + 100px);
 }
 
-.button-conntainer{
+.button-container{
     display: flex;
     align-items: flex-end;  /* flex-end : */
     column-gap: 20px;
