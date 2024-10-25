@@ -19,7 +19,7 @@
 .selection-item{
     padding: 5px 15px;
 }
-.selection-menu,
+.select-menu,
 .selection-item:hover{
     cursor: pointer;
     background-color: white;
@@ -34,7 +34,8 @@
 }
 #calendar,
 #selection-washingmachine-time,
-#selection-room-name{
+#selection-room-name,
+#Board{
     display: none;
 }
 #selection-washingmachine-time,
