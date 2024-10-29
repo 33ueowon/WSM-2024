@@ -16,7 +16,9 @@ const setPage = (page) => {
         selectionItemDiv.classList.remove("select-menu");
     }
     //selection 칠하자
-    selectionItemDivs [page-1].classList.add("select-menu");
+    if (page != 4) {    //세탁기 예약 현황표는 selection이 없음
+        selectionItemDivs[page-1].classList.add("select-menu");
+    }
     
     //clear pageDiv
     pageDivs.forEach(pageDiv => {
