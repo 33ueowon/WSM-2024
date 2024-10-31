@@ -1,5 +1,7 @@
 let allData;    //초기 설정에 필요한 모든 데이터 : 세탁기, 시간, 호실
 let weeklyReservation;  //미리 정해진 요일별 예약 데이터
+let newReservation;    //사용자가 새롭게 지금 입력하는 예약정보, 1페이지에서 초기화 하자
+let reservation;    //
 
 
 
@@ -55,6 +57,25 @@ const setPage = (page) => {
 
     //show pageDiv 1
     pageDivs[page-1].style.display = "block";
+}
+const clickDate = (event) => {
+    //예약정보 초기화
+    newReservation ={
+        "name":undefined,
+        "room":undefined,
+        "date":undefined,
+        "time":undefined,
+        "washingmachine":undefined,
+        "notification":true
+    };
+    //날짜 Date 가져오자
+    const dateString = event.target.dataset.date;
+    const dateData = new Date(dateString);
+
+    //날짜 date 보관하자
+    newReservation.date = dateData;
+    //2페이지로 가자
+    setPage(2)
 }
 initData();
 setPage(2);

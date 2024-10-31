@@ -87,6 +87,8 @@ const setCalendar = (date) => {
     for (let date = 1; date <= lastDate.getDate(); date++) {
         let currentMonthDateDiv = document.createElement("div");    //<div></div>
         currentMonthDateDiv.className = "item"; //<div class= "item"></div>
+        currentMonthDateDiv.onclick = (event) => clickDate(event);
+        currentMonthDateDiv.dataset.date = `${year}-${month+1}-${date}`;    //<div class="item" onclick="clickDate" data-data="년-월-일"></div>
         currentMonthDateDiv.textContent = date; ////<div class= "item">1</div>
         calendarContainerDiv.appendChild(currentMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
     }
@@ -95,7 +97,7 @@ const setCalendar = (date) => {
     // 1~? ?: 6-이번 달 마지막 날의 요일
     for (let date = 1; date <= (6 -  lastDay); date++) {
         let nextMonthDateDiv = document.createElement("div");    //<div></div>
-        nextMonthDateDiv.className = "item other-month"; //<div class= "item"></div>
+        nextMonthDateDiv.className = "item"; //<div class= "item"></div>
         nextMonthDateDiv.textContent = date; ////<div class= "item">1</div>
         calendarContainerDiv.appendChild(nextMonthDateDiv); //<div id = "calendar-container"><div class = "item">1</div></div>
     }
