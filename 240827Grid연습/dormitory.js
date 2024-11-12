@@ -15,13 +15,15 @@ const washingmachineSelect = document.getElementById("washingmachine");
 const timeSelect = document.getElementById("time");
 const selectionRoomNameDiv = document.querySelector("#selection-room-name");
 const boardDiv = document.querySelector("#Board");
+const roomSelect = document.getElementById("room");
+const nameInput = document.getElementById("name")
 
 const pageDivs = [calendarDiv, selectionWashingmachineTimeDiv, selectionRoomNameDiv, boardDiv];
 // console.log(pageDivs);
 //초기 데이터 가져오자 , allData.json, weekly-reservation.json
 const initData = () =>{
     const getAllData = () => {
-            const url = 'allData.json'
+        const url = 'allData.json'
         fetch(url)
         .then(response => response.json())
         .then(data => allData = data)
@@ -61,7 +63,7 @@ const setPage = (page) => {
     pageDivs[page-1].style.display = "block";
 
     if(page === 2){      //시간 선택: 세탁기, 시간
-        initWashingmachineTime();//
+        initWashingmachineTime();
 
         //선택한 날짜의 요일 구하자
 
@@ -78,10 +80,15 @@ const setPage = (page) => {
     }else if(page === 3){    //호실이름
         newReservation.washingmachine = washingmachineSelect.value; //세탁기 option에서 사용자가 선택한 세탁깅의 value속성값을 가져오자.
         newReservation.time = timeSelect.value;
-        // initRoomname();
+
+        initRoomname();
 
     }else if(page === 4){    //세탁기 예약 현황표    
-
+        // 호실, 이름 보관하자
+        newReservation.room = roomSelect.value;
+        newReservation.name = nameInput.value;
+        console.log(newReservation);
+        //initTable();
     }
 }
 const clickDate = (event) => {
@@ -104,11 +111,11 @@ const clickDate = (event) => {
     setPage(2)
 }
 initData();
-setPage(2);
+setPage(1);
 
 const initWashingmachineTime = () => {
     let allWashingmachineTime = {};
-    let washingmachine; //세탁기 번호 모음
+    let washingmachines; //세탁기 번호 모음
 
     // //기숙사에 있는 모든 세탁기, 시간 정보 가져오자
     // console.log(allData);
@@ -127,7 +134,7 @@ const initWashingmachineTime = () => {
     });
 
         //선택한 날짜의 요일 구하자
-        let weekday = newReservation.data.getDay();
+        let weekday = newReservation.date.getDay();
 
         //그 요일의 미리 예약된 세탁기와 시간 파악하자
         //예약된 게 있으면 select목록에서 빼자
@@ -152,9 +159,7 @@ const initWashingmachineTime = () => {
         washingmachineSelect.innerHTML = "";
         washingmachines = Object.keys(allWashingmachineTime);
         // 예약할 시간이 없ㅇ으면, 세탁기 번호도 빼자. allWashingmachineTime = {세탁기 번호 : [시간,시간,시간]}
-        washingmachine = w
-        
-        ashingmachines.filter((washingmachine) => allWashingmachineTime[washingmachine].length > 0)
+        washingmachine = washingmachines.filter((washingmachine) => allWashingmachineTime[washingmachine].length > 0)
         // console.log(washingmachines);   //["1","2","3"]
         washingmachines.forEach((washingmachine) => {
             //option태그 만들자
@@ -186,3 +191,19 @@ const initWashingmachineTime = () => {
 
 
 }   
+
+const initRoomname = () => {
+    //모든 호실 표시하자
+    //allData에서 방 정보 가져와서 <option value="401">401호</option> 만들어서 roomSelect에 자식으로 붙이자.
+    let rooms = allData.room;
+    let optionString = "";
+    rooms.forEach((room) =>{
+        optionString += `<option value="${room}">${room}호</option>`; 
+    })
+    roomSelect.innerHTML = optionString;
+    // <option value="401">401호</option>
+    //이름 초기화 하자
+    nameInput.value = "";   
+    //4page에 호실, 이름 넘기자
+
+}
