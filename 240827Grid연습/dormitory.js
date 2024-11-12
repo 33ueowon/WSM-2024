@@ -1,7 +1,7 @@
 let allData;    //초기 설정에 필요한 모든 데이터 : 세탁기, 시간, 호실
 let weeklyReservations;  //미리 정해진 요일별 예약 데이터
 let newReservation;    //사용자가 새롭게 지금 입력하는 예약정보, 1페이지에서 초기화 하자
-let reservation;    //
+let reservations = [];    //사용자가 예약한 정보들의 덩어리
 
 
 
@@ -16,7 +16,9 @@ const timeSelect = document.getElementById("time");
 const selectionRoomNameDiv = document.querySelector("#selection-room-name");
 const boardDiv = document.querySelector("#Board");
 const roomSelect = document.getElementById("room");
-const nameInput = document.getElementById("name")
+const nameInput = document.getElementById("name");
+const boardContainerDiv = document.getElementsByClassName("board-container")[0];
+let boardContainerDivInitString = boardContainerDiv.innerHTML;
 
 const pageDivs = [calendarDiv, selectionWashingmachineTimeDiv, selectionRoomNameDiv, boardDiv];
 // console.log(pageDivs);
@@ -87,8 +89,10 @@ const setPage = (page) => {
         // 호실, 이름 보관하자
         newReservation.room = roomSelect.value;
         newReservation.name = nameInput.value;
-        console.log(newReservation);
-        //initTable();
+
+        reservations.push(newReservation);
+        
+        initTable();
     }
 }
 const clickDate = (event) => {
@@ -206,4 +210,25 @@ const initRoomname = () => {
     nameInput.value = "";   
     //4page에 호실, 이름 넘기자
 
+}
+const initTable = () => {
+    // 사용자가 예약한 내용들(reservations) 보여주자.
+    //.board-container 내용 뒤에, <div class= "item">내용들</div>
+
+    let itemString = boardContainerDivInitString;   //제목만 있는 스트링
+    reservations.forEach((reservation) => {
+        const year = reservation.date.getFullYear();
+        const month = reservation.date.getMonth() + 1;
+        const date = reservation.date.getDate();
+
+        itemString +=`
+        <div class = "item">${reservation.name}</div>
+        <div class = "item">${reservation.room}호</div>
+        <div class = "item">${year}년${month}월${date}일</div>
+        <div class = "item">${allData["time"][reservation.time]}</div>
+        <div class = "item">${reservation.washingmachine}번 세탁기</div>
+        <div class = "item">${reservation.notification?"🛎️":"💣"}</div>
+        `;
+    });
+    boardContainerDiv.innerHTML = itemString;   //string -> 표에 표시하자
 }
