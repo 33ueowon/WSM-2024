@@ -63,7 +63,15 @@ const setPage = (page) => {
 
     //show pageDiv 1
     pageDivs[page-1].style.display = "block";
-
+    if(page === 1){
+        const storedReservations = localStorage.getItem("reservations");
+        if(storedReservations){
+            reservations = JSON.parse(storedReservations);  //string -> JSON
+            reservations.map((reservation) => reservation.date = new Date(reservation.date));    //.date에 저장된 string -> Data 객체로 바꾸자
+        }else{      // 저장된 예약들이 없으면, (아예 예약 완료 버튼 안눌렀을 때, 처음이란 설레는 말)
+            reservations = [];
+        }
+    }
     if(page === 2){      //시간 선택: 세탁기, 시간
         initWashingmachineTime();
 
@@ -156,7 +164,19 @@ const initWashingmachineTime = () => {
 
         //그 요일의 미리 예약된 세탁기와 시간이 다 차면, 그 세탁기 select목록에서 빼자
         
-        //TODO: 사용자가 예약한 내용도 위의 것을 다 파악해서 빼자
+        //사용자가 예약한 내용도 위의 것을 다 파악해서 빼자
+        reservations.forEach((reservation) => {
+            // 사용자가 예약한 날짜와 지금 입력하고 있는 새로운 예약의 날짜가 같으면, 그 세탁기 번호의 그 시간 빼자.
+            if(reservation.date.getFullYear() == newReservation.date.getFullYear()
+                && reservation.date.getMonth() == newReservation.date.getMonth()
+                && reservation.date.getDate() == newReservation.date.getDate()){
+                    const{ washingmachine, time } = reservation;
+                    const index = allWashingmachineTime[washingmachine].indexOf(String(time));
+                    if(index > -1){
+                        allWashingmachineTime[washingmachine].splice(index,1);
+                    }
+            }
+        });
 
         
         //select 들 : 세탁기 번호, 시간들 만들자
@@ -231,4 +251,11 @@ const initTable = () => {
         `;
     });
     boardContainerDiv.innerHTML = itemString;   //string -> 표에 표시하자
+}
+
+const saveReservations = () => {
+    //원래는 백엔드에 reservations 정보를 넘겨서 데이터베이스에 저장해야함.
+    //그냥 로컬에 기록해둘 것이에요. LocalStorage 라는 친구
+    alert("예약완료");
+    localStorage.setItem("reservations",JSON.stringify(reservations));  //예약들을 저장하자 JSON -> string
 }
